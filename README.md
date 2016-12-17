@@ -29,3 +29,11 @@ There is an intentional similarity with [Adam Dunkel's Protothreads](http://dunk
 * no switch-case statements are used to enable the functionality and thus switch is allowed to be placed in the function body
 * information about the entry and exit is declared in the function scope so there is no need to pass it as a function argument allowing the function prototype to be defined without limitations
 * Only `PC_INIT();` at the beginning of the function is needed to allow the function to save the PC state
+
+# Test it
+
+A simple test is provided to demonstrate the funcionality. In order to build it run:
+```
+make
+```
+and execute: `./test_coron`
