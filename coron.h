@@ -38,6 +38,7 @@
  * execute on function call
  */
 #define PC_INIT() static void *__l_state = &&__lab_init__;                     \
+                  bool __yield_flag = false;                                   \
                   goto *__l_state;                                             \
                   __lab_init__:
 
@@ -45,7 +46,9 @@
  * will be the entry point
  */
 #define PC_SAVE() __l_state = &&L_NAME(__lab, __LINE__ );                      \
+                  if(__yield_flag) return;                                     \
                   L_NAME(__lab, __LINE__):                                     \
+                  __yield_flag = true;                                         \
 
 /* PC_RESET() resets the entry back to PC_INIT */
 #define PC_RESET() __l_state = &&__lab_init__;                                 \

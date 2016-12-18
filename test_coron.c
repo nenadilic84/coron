@@ -36,8 +36,6 @@ static void coron_1s_loop_test(void)
 {
 
     static uint8_t timer_counter = 0;
-    bool yield_flag = false;
-
 
     PC_INIT(); /* initializes static variable for saving the PC.
                 * Next instruction called after the PC_INIT will be
@@ -51,10 +49,10 @@ static void coron_1s_loop_test(void)
         PC_SAVE(); /* saves the current PC and next time the function is called
                     * this line will be the entry point
                     */
-        if(yield_flag || (timer_10ms % 100)) { /* only continue every second */
+
+        if(timer_10ms % 100) { /* only continue every second */
             return;
         }
-        yield_flag = true;
 
         printf("hello from 1s loop!\n");
 
@@ -79,8 +77,6 @@ static void coron_1s_loop_test(void)
 static void coron_100ms_loop_test(void)
 {
 
-    bool yield_flag = false;
-
     PC_INIT();
 
     printf("entering 100ms loop\n"); /* will only be printed first time
@@ -88,10 +84,10 @@ static void coron_100ms_loop_test(void)
                                       */
     while(1) {
         PC_SAVE();
-        if(yield_flag || (timer_10ms % 10)) { /* only continue every 100ms */
+
+        if(timer_10ms % 10) { /* only continue every 100ms */
             return;
         }
-        yield_flag = true;
 
         printf("hello from 100ms loop!\n");
     }
