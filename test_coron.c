@@ -73,6 +73,12 @@ static void coron_1s_loop_test(void)
 
 }
 
+/*
+ * Adds the function pointer to the section "sec_main_loop" from where all
+ * functions are going to be called latter using call_main_loop_fns macro
+ */
+add_to_main_loop(coron_1s_loop_test);
+
 /* example function */
 static void coron_100ms_loop_test(void)
 {
@@ -92,6 +98,7 @@ static void coron_100ms_loop_test(void)
         printf("hello from 100ms loop!\n");
     }
 }
+add_to_main_loop(coron_100ms_loop_test);
 
 int main(int argc, const char * argv[])
 {
@@ -101,8 +108,7 @@ int main(int argc, const char * argv[])
     while (1) {
         timer_10ms++;
         usleep(10000);
-        coron_1s_loop_test();
-        coron_100ms_loop_test();
+        call_main_loop_fns();
     }
 
     return 0;

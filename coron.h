@@ -53,4 +53,31 @@
 /* PC_RESET() resets the entry back to PC_INIT */
 #define PC_RESET() __l_state = &&__lab_init__;                                 \
 
+
+typedef void (*main_loop_t)(void);
+/*
+ * add_to_main_loop adds the function pointer to the section "sec_main_loop"
+ * from where all functions are going to be called using
+ * call_main_loop_fns macro
+ */
+#define add_to_main_loop(fn)                                                   \
+        static main_loop_t __main_loop_##fn                                    \
+        __attribute((used, section("sec_main_loop"))) = fn
+
+/*
+ * __start_sec_main_loop and __stop_sec_main_loop exports the
+ * variable for accessing the beginning and the end of the
+ * sec_main_loop section
+ */
+extern main_loop_t __start_sec_main_loop[], __stop_sec_main_loop[];
+
+/*
+ * call_main_loop_fns used to cycle over the added functionsd and execute
+ * one by one
+ */
+#define call_main_loop_fns()                                                    \
+    for (main_loop_t * call = __start_sec_main_loop;                            \
+         call < __stop_sec_main_loop;                                           \
+         call++) (*call)();
+
 #endif /* _CORON_H_ */
