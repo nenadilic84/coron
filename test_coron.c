@@ -25,8 +25,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include <unistd.h>
-#include "coron.h"
+#include "coron/coron.h"
 
 /* time tracking */
 uint64_t timer_10ms = 0;

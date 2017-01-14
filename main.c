@@ -23,7 +23,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "coron.h"
+#include "coron/coron.h"
 
 /* time tracking */
 extern uint64_t timer_10ms;

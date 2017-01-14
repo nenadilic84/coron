@@ -27,6 +27,8 @@
 #define _CORON_H_
 
 #include <stdbool.h>
+#include <stdint.h>
+
 
 /* Macros to enable PC (program counter) initializing, saving and reseting */
 
