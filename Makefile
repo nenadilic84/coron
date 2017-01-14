@@ -4,8 +4,9 @@ CFLAGS :=  -Wall -std=gnu99 -g -fno-common
 LDFLAGS :=
 LIBS :=
 
-CSOURCES := test_coron.c main.c
+CSOURCES := main.c
 CSOURCES += $(wildcard coron/*.c)
+CSOURCES += $(wildcard tests/*.c)
 
 OBJECTS := $(CSOURCES:.c=.o)
 EXECUTABLE := test_coron
@@ -19,4 +20,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 clean:
-	rm -rf **/*.o *.elf 
+	rm -rf *.o **/*.o *.elf 
