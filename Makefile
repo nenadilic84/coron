@@ -4,7 +4,7 @@ CFLAGS :=  -Wall -std=gnu99 -g -fno-common
 LDFLAGS :=
 LIBS :=
 
-CSOURCES := test_coron.c
+CSOURCES := test_coron.c main.c
 
 OBJECTS := $(CSOURCES:.c=.o)
 EXECUTABLE := test_coron

@@ -99,17 +99,3 @@ static void coron_100ms_loop_test(void)
     }
 }
 add_to_main_loop(coron_100ms_loop_test);
-
-int main(int argc, const char * argv[])
-{
-
-    printf("Hello, World!\n");
-
-    while (1) {
-        timer_10ms++;
-        usleep(10000);
-        call_main_loop_fns();
-    }
-
-    return 0;
-}
