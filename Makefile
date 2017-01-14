@@ -5,6 +5,7 @@ LDFLAGS :=
 LIBS :=
 
 CSOURCES := test_coron.c main.c
+CSOURCES += $(wildcard coron/*.c)
 
 OBJECTS := $(CSOURCES:.c=.o)
 EXECUTABLE := test_coron
@@ -18,4 +19,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 clean:
-	rm -rf *.o *.elf
+	rm -rf **/*.o *.elf 

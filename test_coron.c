@@ -27,13 +27,12 @@
 #include <stdint.h>
 #include "coron/coron.h"
 
-/* time tracking */
-uint64_t timer_10ms = 0;
 
 /* example function */
 static void coron_1s_loop_test(void)
 {
 
+    static struct timer timer_10ms;
     static uint8_t timer_counter = 0;
 
     PC_INIT(); /* initializes static variable for saving the PC.
@@ -42,6 +41,8 @@ static void coron_1s_loop_test(void)
                 * upon function call
                 */
 
+    timer_set(&timer_10ms, CLOCK_SECOND);
+
     printf("entering 1s loop\n");
 
     while(1) {
@@ -49,9 +50,11 @@ static void coron_1s_loop_test(void)
                     * this line will be the entry point
                     */
 
-        if(timer_10ms % 100) { /* only continue every second */
+        if(!timer_expired(&timer_10ms)) { /* only continue every second */
             return;
         }
+
+        timer_reset(&timer_10ms);
 
         printf("hello from 1s loop!\n");
 
@@ -82,7 +85,11 @@ add_to_main_loop(coron_1s_loop_test);
 static void coron_100ms_loop_test(void)
 {
 
+    static struct timer timer_100ms;
+
     PC_INIT();
+
+    timer_set(&timer_100ms, CLOCK_SECOND / 10);
 
     printf("entering 100ms loop\n"); /* will only be printed first time
                                       * function is called
@@ -90,9 +97,11 @@ static void coron_100ms_loop_test(void)
     while(1) {
         PC_SAVE();
 
-        if(timer_10ms % 10) { /* only continue every 100ms */
+        if(!timer_expired(&timer_100ms)) { /* only continue every 100ms */
             return;
         }
+
+        timer_reset(&timer_100ms);
 
         printf("hello from 100ms loop!\n");
     }

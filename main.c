@@ -26,7 +26,7 @@
 #include "coron/coron.h"
 
 /* time tracking */
-extern uint64_t timer_10ms;
+uint64_t time_keeping = 0;
 
 int main(int argc, const char * argv[])
 {
@@ -34,7 +34,7 @@ int main(int argc, const char * argv[])
     printf("Hello, World!\n");
 
     while (1) {
-        timer_10ms++;
+        time_keeping++;
         usleep(10000);
         call_main_loop_fns();
     }
