@@ -29,6 +29,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "timer.h"
+#include "msgq.h"
 
 
 /* Macros to enable PC (program counter) initializing, saving and reseting */
